@@ -11,6 +11,10 @@
 <body>
     <div class="container">
         <div class="row pt-5">
+            <div class="col-6 input-lbl">CURL (Dynatrace dump)</div>
+            <div class="col-6 input-lbl">OFX TEMPLATE</div>
+        </div>
+        <div class="row">
             <div class="col-6">
                 <textarea id="dump" class="shadow-textarea" cols="80" rows="10"></textarea>
             </div>
@@ -22,6 +26,9 @@
             <div class="col-1">   
                 <button onclick="handleParse()">PARSE</button>
             </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-1 output-lbl">OUTPUT</div>
         </div>
         <div class="row">
             <div class="col-6 offset-3">

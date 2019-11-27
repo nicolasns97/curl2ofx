@@ -1,3 +1,11 @@
 textarea {
     outline: none;
 }
+
+.input-lbl {
+    text-align: center;
+}
+
+.output-lbl {
+    text-align: center;
+}
