@@ -3,12 +3,13 @@ const handleParse = () => {
     let template = document.getElementById('ofx').value;
     let output = document.getElementById('output');
 
-    let data = getCUrlData(getCUrl(dump));
+    let cURL = getCUrl(dump);
+    let data = getCUrlData(cURL);
 
-    output.value = unescape(replaceTemplate(template, data));
+    output.value = unescape(parseTemplate(template, data));
 }
 
-const replaceTemplate = (src, data) => {
+const parseTemplate = (src, data) => {
     let doc = parseXmlFromString(src);
 
     data.forEach(d => {
@@ -26,14 +27,7 @@ const replaceTemplate = (src, data) => {
 const getCUrl = (src) => {
     let doc = parseXmlFromString(src);
     let nodes = getDumpNodes(doc);
-    let START_CURL_INDEX = indexOfStringArray(nodes, 'START CURL');
-    let END_CURL_INDEX = indexOfStringArray(nodes, 'END CURL');
-
-    if (START_CURL_INDEX != -1 && END_CURL_INDEX != -1) {
-        return nodes.slice(START_CURL_INDEX, END_CURL_INDEX+1).join("")
-    } else {
-        throw new Error("cURL request not found.");
-    }
+    return nodes.join("")
 }
 
 /**
@@ -41,7 +35,8 @@ const getCUrl = (src) => {
  * @param {string} cURL 
  */
 const getCUrlData = (cURL) => {
-    let temp = cURL.slice(cURL.indexOf('-d'));
+    let temp = cURL.slice(cURL.indexOf('curl '))
+    temp = temp.slice(temp.indexOf('-d '));
     temp = temp.slice(temp.indexOf('"') + 1);
     temp = temp.slice(0, temp.indexOf('"'));
     return temp.split('&').map(el => ( { field: el.split('=')[0], value: el.split('=')[1] } ));
