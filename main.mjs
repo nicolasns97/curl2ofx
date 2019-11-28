@@ -13,13 +13,17 @@ const handleParse = () => {
     let active = document.querySelector('.nav-item a.active');
     let dataInput;
     switch(active.getAttribute('href')) {
-        case '#curl-tab': dataInput = 'CURL';
-        case '#dynatrace-tab': dataInput = 'DYNATRACE'
+        case '#curl-tab': 
+            dataInput = 'CURL'; 
+            break;
+        case '#dynatrace-tab': 
+            dataInput = 'DYNATRACE';
+            break;
     }
     let data;
     if (dataInput === 'CURL') {
         let text = document.getElementById('curl').value;
-        data = getCurlData(text);
+        data = getCUrlData(text);
     } else if (dataInput === 'DYNATRACE') {
         let text = document.getElementById('dynatrace').value;
         let cURL = getCUrl(text);
