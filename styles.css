@@ -1,5 +1,25 @@
 textarea {
     outline: none;
+    resize: none;
+    border-radius: .25rem !important;
+    border-color: #007bff !important
+}
+
+textarea:disabled {
+    background-color: white !important;
+}
+::-webkit-scrollbar { width: 0 !important }
+
+textarea-container {
+    position: relative;
+}
+
+.textarea-container textarea {
+}
+
+.textarea-container button {
+    position: absolute;
+    top: 0;
 }
 
 .input-lbl {

@@ -1,12 +1,35 @@
+import copyToClipboard from './modules/clipboard.mjs'
+
+window.onload = () => {
+    document.getElementById('parse').addEventListener('click', handleParse);
+    document.getElementById('copy').addEventListener('click', handleCopy);
+}
+
+const handleCopy = () => {
+    copyToClipboard(document.getElementById('output').value);
+}
+
 const handleParse = () => {
-    let dump = document.getElementById('dump').value;
+    let active = document.querySelector('.nav-item a.active');
+    let dataInput;
+    switch(active.getAttribute('href')) {
+        case '#curl-tab': dataInput = 'CURL';
+        case '#dynatrace-tab': dataInput = 'DYNATRACE'
+    }
+    let data;
+    if (dataInput === 'CURL') {
+        let text = document.getElementById('curl').value;
+        data = getCurlData(text);
+    } else if (dataInput === 'DYNATRACE') {
+        let text = document.getElementById('dynatrace').value;
+        let cURL = getCUrl(text);
+        data = getCUrlData(cURL);
+    }
     let template = document.getElementById('ofx').value;
-    let output = document.getElementById('output');
-
-    let cURL = getCUrl(dump);
-    let data = getCUrlData(cURL);
-
-    output.value = unescape(parseTemplate(template, data));
+    if (template != "") {
+        let output = document.getElementById('output');
+        output.value = '\n\n' + unescape(parseTemplate(template, data));
+    }
 }
 
 const parseTemplate = (src, data) => {

@@ -10,21 +10,47 @@
 </head>
 <body>
     <div class="container">
-        <div class="row pt-5">
-            <div class="col-6 input-lbl">CURL (Dynatrace dump)</div>
-            <div class="col-6 input-lbl">OFX TEMPLATE</div>
+        <div class="row pt-4 pb-1">
+            <div class="col-6 input-lbl">
+                <ul class="nav nav-pills nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#curl-tab">
+                            <img src="./assets/img/curl.svg" width="100px" height="20px" alt="cURL">
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#dynatrace-tab">
+                            <img src="./assets/img/dynatrace.svg" width="100px" height="20px" alt="Dynatrace">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 input-lbl">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active">OFX</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="row">
             <div class="col-6">
-                <textarea id="dump" class="shadow-textarea" cols="80" rows="10"></textarea>
+                <div class="tab-content" id="inputFieldsTab">
+                    <div class="tab-pane show active" id="curl-tab">
+                        <textarea id="curl" cols="70" rows="15" placeholder="Insert cURL here..."></textarea>
+                    </div>
+                    <div class="tab-pane" id="dynatrace-tab">
+                        <textarea id="dynatrace" cols="70" rows="15" placeholder="Insert Dynatrace dump here..."></textarea>
+                    </div>
+                </div>
             </div>
             <div class="col-6">
-                <textarea id="ofx" cols="80" rows="10"></textarea>
+                <textarea id="ofx" cols="70" rows="15" placeholder="Insert template here..."></textarea>
             </div>
         </div>
         <div class="row justify-content-center py-3">
-            <div class="col-1">   
-                <button onclick="handleParse()">PARSE</button>
+            <div class="col-4">   
+                <button class="btn btn-primary btn-block" id="parse">PARSE</button>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -32,13 +58,18 @@
         </div>
         <div class="row">
             <div class="col-6 offset-3">
-                <textarea id="output" cols="80" rows="10"></textarea>
+                <div class="textarea-container">
+                    <textarea id="output" disabled cols="80" rows="15"></textarea>
+                    <button class="btn btn-primary" id="copy">
+                        <img src="./assets/img/copy.svg" width="20px" height="20px" alt="copy">
+                    </button>
+                </div>
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="main.js"></script>
+    <script type="module" src="main.mjs"></script>
 </body>
 </html>
